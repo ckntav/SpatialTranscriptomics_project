@@ -9,5 +9,5 @@
 #SBATCH --output=/home/chris11/projects/def-stbil30/chris11/SpatialTranscriptomics_project/output/log/spaceranger_aggr_ABCD_none_log.txt
 
 spaceranger aggr --id=aggr_ABCD_none \
-                 --csv=input/aggrcsv_ABCD.csv \
+                 --csv=/home/chris11/projects/def-stbil30/chris11/SpatialTranscriptomics_project/input/ABCD_aggrcsv.csv \
                  --normalize=none
