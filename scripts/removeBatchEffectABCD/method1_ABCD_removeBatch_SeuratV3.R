@@ -39,19 +39,19 @@ sampleD1
 #####
 sampleA1[["percent.mt"]]  <- PercentageFeatureSet(sampleA1, pattern = "^MT-")
 sampleA1[["percent.rbp"]] <- PercentageFeatureSet(sampleA1, pattern = "^RP[SL]")
-VlnPlot(sampleA1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleA1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample A1")
 
 sampleB1[["percent.mt"]]  <- PercentageFeatureSet(sampleB1, pattern = "^MT-")
 sampleB1[["percent.rbp"]] <- PercentageFeatureSet(sampleB1, pattern = "^RP[SL]")
-VlnPlot(sampleB1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleB1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample B1")
 
 sampleC1[["percent.mt"]]  <- PercentageFeatureSet(sampleC1, pattern = "^MT-")
 sampleC1[["percent.rbp"]] <- PercentageFeatureSet(sampleC1, pattern = "^RP[SL]")
-VlnPlot(sampleC1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleC1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample C1")
 
 sampleD1[["percent.mt"]]  <- PercentageFeatureSet(sampleD1, pattern = "^MT-")
 sampleD1[["percent.rbp"]] <- PercentageFeatureSet(sampleD1, pattern = "^RP[SL]")
-VlnPlot(sampleD1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleD1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample D1")
 
 
 #####
@@ -137,7 +137,7 @@ plot_integrated_clusters(sample_seurat)
 
 #### Puis sur les lames?
 SpatialDimPlot(sample_seurat, ncol = 2)
-SpatialDimPlot(sample_seurat, ncol = 3)
+SpatialDimPlot(sample_seurat, ncol = 4)
 SpatialDimPlot(sample_seurat, ncol = 3, images = "sliceA1",
                cells.highlight = CellsByIdentities(object = sample_seurat, idents = c(0, 1, 2, 5, 6, 7, 11, 15, 16, 19)),
                facet.highlight = TRUE)
@@ -157,7 +157,7 @@ SpatialPlot(sample_seurat, group.by = "ident")
 # SpatialDimPlot(sampleA1b, cells.highlight = CellsByIdentities(object = sampleA1b, idents = c(1, 2, 3, 4, 5, 6, 7 ,8)), facet.highlight = TRUE, ncol = 3)
 
 # saveRDS
-saveRDS(sample_seurat, file = "output/ABCD_object/20220624_ABCD_object_method1.rds")
+saveRDS(sample_seurat, file = "output/ABCD_object/20220626_ABCD_object_method1.rds")
 
 ###### Export Corrected Projections
 # split the object
@@ -198,7 +198,7 @@ UMAP.D1 <- cbind("Barcode" = D1.barcode, D1.proj)
 
 # merge the two samples back into the same object, and export into a CSV
 split.umap <- rbind(UMAP.A1, UMAP.B1, UMAP.C1, UMAP.D1)
-write.table(split.umap, file = "output/correctedABCD/20220624_method1_corrected_umap_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)
+write.table(split.umap, file = "output/correctedABCD/20220626_method1_corrected_umap_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)
 
 ###### 7. Export Clusters
 clusters.A1 = Idents(split.data$sampleA1)
@@ -214,4 +214,4 @@ clusters.D1 = Idents(split.data$sampleD1)
 clusters.D1.data <- cbind("Barcode" = D1.barcode, data.frame("clusters" = clusters.D1))
 
 split.cluster <- rbind(clusters.A1.data, clusters.B1.data, clusters.C1.data, clusters.D1.data)
-write.table(split.cluster, file="output/correctedABCD/20220624_method1_corrected_clusters_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)
+write.table(split.cluster, file="output/correctedABCD/20220626_method1_corrected_clusters_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)

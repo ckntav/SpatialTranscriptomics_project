@@ -39,19 +39,19 @@ sampleD1
 #####
 sampleA1[["percent.mt"]]  <- PercentageFeatureSet(sampleA1, pattern = "^MT-")
 sampleA1[["percent.rbp"]] <- PercentageFeatureSet(sampleA1, pattern = "^RP[SL]")
-VlnPlot(sampleA1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleA1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample A1")
 
 sampleB1[["percent.mt"]]  <- PercentageFeatureSet(sampleB1, pattern = "^MT-")
 sampleB1[["percent.rbp"]] <- PercentageFeatureSet(sampleB1, pattern = "^RP[SL]")
-VlnPlot(sampleB1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleB1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample B1")
 
 sampleC1[["percent.mt"]]  <- PercentageFeatureSet(sampleC1, pattern = "^MT-")
 sampleC1[["percent.rbp"]] <- PercentageFeatureSet(sampleC1, pattern = "^RP[SL]")
-VlnPlot(sampleC1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleC1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample C1")
 
 sampleD1[["percent.mt"]]  <- PercentageFeatureSet(sampleD1, pattern = "^MT-")
 sampleD1[["percent.rbp"]] <- PercentageFeatureSet(sampleD1, pattern = "^RP[SL]")
-VlnPlot(sampleD1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4)
+VlnPlot(sampleD1, features = c("nFeature_Spatial","nCount_Spatial","percent.mt","percent.rbp"), group.by = "orig.ident", ncol = 4) + plot_annotation(title = "Sample D1")
 
 
 #####
@@ -93,6 +93,8 @@ DimPlot(ABCD_liger, reduction = "umap", group.by = "orig.ident") + plot_annotati
 DimPlot(ABCD_liger, reduction = "umap", group.by = "orig.ident", split.by = "orig.ident") + plot_annotation(title = "ABCD, after integration (LIGER)") + NoLegend()
 
 DimPlot(ABCD_liger, reduction = "umap", group.by = "ident", label = T, split.by = "orig.ident") + plot_annotation(title = "ABCD, after integration (LIGER)")
+DimPlot(ABCD_liger, reduction = "umap", group.by = "ident", label = T, label.box = T) + plot_annotation(title = "ABCD, after integration (LIGER)")
+
 
 ##### Finally, let’s take a look at the cluster content:
 # We can now calculate the number of cells in each cluster that came for each samplet:
@@ -122,7 +124,7 @@ SpatialDimPlot(ABCD_liger, ncol = 3,
 #                cells.highlight = CellsByIdentities(object = ABCD_liger, idents = c(1, 2)), facet.highlight = TRUE)
 
 # saveRDS
-saveRDS(ABCD_liger, file = "output/ABCD_object/20220624_ABCD_object_method3.rds")
+saveRDS(ABCD_liger, file = "output/ABCD_object/20220626_ABCD_object_method3.rds")
 
 
 # 
@@ -169,7 +171,7 @@ UMAP.D1 <- cbind("Barcode" = D1.barcode, D1.proj)
 
 # merge the two samples back into the same object, and export into a CSV
 split.umap <- rbind(UMAP.A1, UMAP.B1, UMAP.C1, UMAP.D1)
-write.table(split.umap, file = "output/correctedABCD/20220624_method3_corrected_umap_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)
+write.table(split.umap, file = "output/correctedABCD/20220626_method3_corrected_umap_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)
 
 ###### 7. Export Clusters
 clusters.A1 = Idents(split.data$sampleA1)
@@ -185,4 +187,4 @@ clusters.D1 = Idents(split.data$sampleD1)
 clusters.D1.data <- cbind("Barcode" = D1.barcode, data.frame("clusters" = clusters.D1))
 
 split.cluster <- rbind(clusters.A1.data, clusters.B1.data, clusters.C1.data, clusters.D1.data)
-write.table(split.cluster, file="output/correctedABCD/20220622_method3_corrected_clusters_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)
+write.table(split.cluster, file="output/correctedABCD/20220626_method3_corrected_clusters_ABCD.csv", sep = ",", quote = F, row.names = F, col.names = T)
